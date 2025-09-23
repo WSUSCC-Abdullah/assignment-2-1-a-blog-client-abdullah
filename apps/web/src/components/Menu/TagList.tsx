@@ -1,19 +1,31 @@
+import Link from "next/link";
 import { type Post } from "@repo/db/data";
 import { tags } from "../../functions/tags";
-import { LinkList } from "./LinkList";
+import { SummaryItem } from "./SummaryItem";
 
-export async function TagList({
+export function TagList({
   selectedTag,
   posts,
 }: {
   selectedTag?: string;
   posts: Post[];
 }) {
-  const postTags = await tags(posts);
+  const postTags = tags(posts); // Should return [{ name: string, count: number }, ...]
 
   return (
-    <LinkList title="Tags">
-      Tags {/* Todo implement, use the summary item */}
-    </LinkList>
+    <ul>
+      {postTags.map((item) => (
+        <li key={item.name}>
+          <Link href={`/tag/${item.name.toLowerCase()}`}>
+            <SummaryItem
+              name={item.name}
+              count={item.count}
+              isSelected={selectedTag === item.name}
+              title={`Posts tagged ${item.name}`}
+            />
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }

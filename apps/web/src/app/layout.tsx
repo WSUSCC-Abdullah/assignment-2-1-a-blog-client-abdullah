@@ -1,8 +1,7 @@
-// import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { cookies } from "next/headers";
 import "./globals.css";
+import AppShell from "./AppShell";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,18 +17,15 @@ export const metadata: Metadata = {
   description: "Blog about full stack development",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const serverCookies = await cookies();
-  const theme = serverCookies.get("theme")?.value || "light";
-
   return (
-    <html lang="en" data-theme={theme}>
+    <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <AppShell>{children}</AppShell>
       </body>
     </html>
   );

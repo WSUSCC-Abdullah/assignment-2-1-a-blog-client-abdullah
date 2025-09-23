@@ -1,6 +1,7 @@
 export function toUrlPath(path: string) {
-  // replace all non alphanumerics characters with hyphen
-  // then replace all sequential hyphens with single hyphen
-  // then remove leading and trailing hyphens
-  return "";
+  return path
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // replace non-alphanumerics with hyphen
+    .replace(/-+/g, "-")         // replace multiple hyphens with single
+    .replace(/^-+|-+$/g, "");    // trim leading/trailing hyphens
 }

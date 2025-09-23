@@ -1,22 +1,24 @@
+import Link from "next/link";
 import { categories } from "@/functions/categories";
 import type { Post } from "@repo/db/data";
 import { toUrlPath } from "@repo/utils/url";
 import { SummaryItem } from "./SummaryItem";
 
 export function CategoryList({ posts }: { posts: Post[] }) {
-  // TODO: Implement proper category list
   return (
-    <>
+    <ul>
       {categories(posts).map((item) => (
-        <SummaryItem
-          key={item.name}
-          count={item.count}
-          name={item.name}
-          isSelected={false}
-          link={`/category/${toUrlPath(item.name)}`}
-          title=""
-        />
+        <li key={item.name}>
+          <Link href={`/category/${toUrlPath(item.name)}`}>
+            <SummaryItem
+              count={item.count}
+              name={item.name}
+              isSelected={false} // Replace with logic if you want to highlight selected
+              title={`Posts in ${item.name}`}
+            />
+          </Link>
+        </li>
       ))}
-    </>
+    </ul>
   );
 }

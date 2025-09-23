@@ -1,18 +1,33 @@
 export function SummaryItem({
   name,
-  link,
   count,
   isSelected,
   title,
 }: {
   name: string;
-  link: string;
   count: number;
   isSelected: boolean;
   title?: string;
 }) {
-  // TODO: Implement the summary item
-  // must show the number of posts in that category and the name
-  // if if is selected it must show in different color/background
-  return <li>Item</li>;
+  return (
+    <div
+      title={title}
+      style={{
+        background: isSelected ? "#e0e0e0" : "transparent",
+        color: isSelected ? "#222" : "#555",
+        fontWeight: isSelected ? "bold" : "normal",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "0.5rem 1rem",
+        borderRadius: "4px",
+        textDecoration: "none",
+        marginBottom: "0.25rem",
+        cursor: "pointer",
+      }}
+    >
+      <span>{name}</span>
+      <span style={{ opacity: 0.7 }}>{count}</span>
+    </div>
+  );
 }

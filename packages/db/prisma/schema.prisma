@@ -11,20 +11,24 @@ datasource db {
 }
 
 model Post {
-  id     Int      @id @default(autoincrement())
-  urlId  String   @unique
-  title  String
-  date   DateTime @default(now())
-  views  Int      @default(0)
-  active Boolean  @default(true)
-  Likes  Like[]
-  // Incomplete
+  id          Int      @id @default(autoincrement())
+  urlId       String   @unique
+  title       String
+  date        DateTime @default(now())
+  views       Int      @default(0)
+  active      Boolean  @default(true)
+  Likes       Like[]
+  content     String   // <-- add this
+  category    String   // <-- add this
+  description String   // <-- add this
+  imageUrl    String   // <-- add this
+  tags        String   // <-- add this
 }
 
 model Like {
   postId Int
   userIP String
-  Post   Post   @relation(fields: [postId], references: [id])
+  Post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@id([postId, userIP])
 }

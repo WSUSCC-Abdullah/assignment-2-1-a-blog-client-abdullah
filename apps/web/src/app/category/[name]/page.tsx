@@ -1,16 +1,15 @@
-import { AppLayout } from "@/components/Layout/AppLayout";
+import { posts } from "@repo/db/data";
 import { Main } from "@/components/Main";
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ name: string }>;
-}) {
-  const { name } = await params;
+export default function Page({ params }: { params: { name: string } }) {
+  const filteredPosts = posts.filter(
+    (post) => post.category.toLowerCase() === params.name.toLowerCase()
+  );
 
   return (
-    <AppLayout>
-      <Main posts={[]} />
-    </AppLayout>
+    <div>
+      <h1 style={{ padding: "1rem 2rem" }}>Category: {params.name}</h1>
+      <Main posts={filteredPosts} />
+    </div>
   );
 }

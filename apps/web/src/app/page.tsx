@@ -1,11 +1,11 @@
+"use client";
+import { useContext } from "react";
 import { posts } from "@repo/db/data";
-import { AppLayout } from "../components/Layout/AppLayout";
-import { Main } from "../components/Main";
-import styles from "./page.module.css";
+import ClientHome from "../components/ClientHome";
+import { SearchContext } from "./AppShell";
+
 export default function Home() {
-  return (
-    <AppLayout>
-      <Main posts={posts} className={styles.main} />
-    </AppLayout>
-  );
+  const { search } = useContext(SearchContext);
+
+  return <ClientHome posts={posts} search={search} />;
 }

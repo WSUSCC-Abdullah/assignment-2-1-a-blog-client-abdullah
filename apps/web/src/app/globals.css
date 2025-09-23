@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-@config "../../tailwind.config.ts";
 
 /* Light mode variables */
 :root {
@@ -91,11 +89,3 @@ button {
   font-family: inherit;
 }
 
-@theme inline {
-  --color-primary: var(--text);
-  --color-primaryHover: var(--text-hover);
-  --color-secondary: var(--text-secondary);
-  --color-secondaryHover: var(--text-secondary-hover);
-  --color-wsu: var(--wsu);
-  --color-wsu-light: var(--wsu-light);
-}

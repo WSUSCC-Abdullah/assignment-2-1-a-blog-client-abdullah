@@ -1,6 +1,6 @@
 import { redirect, notFound } from 'next/navigation';
 import { isLoggedIn } from '../../../../utils/auth';
-import { posts } from '@repo/db/data';
+import { getPostById } from '@repo/db/service';
 import AdminLayout from '../../../../components/AdminLayout';
 import dynamic from 'next/dynamic';
 
@@ -21,7 +21,7 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
 
   const { id } = await params;
   const postId = parseInt(id);
-  const post = posts.find(p => p.id === postId);
+  const post = await getPostById(postId);
 
   if (!post) {
     notFound();

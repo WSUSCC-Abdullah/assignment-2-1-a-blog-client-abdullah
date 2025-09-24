@@ -28,6 +28,10 @@
     "./seed": {
       "types": "./src/seed.ts",
       "default": "./dist/seed.js"
+    },
+    "./service": {
+      "types": "./src/service.ts",
+      "default": "./dist/service.js"
     }
   },
   "dependencies": {

@@ -108,14 +108,38 @@ export default function AdminPostList({ initialPosts }: AdminPostListProps) {
     return filtered;
   }, [posts, filters, sorting]);
 
-  const handleToggleActive = (postId: number) => {
-    setPosts(prevPosts => 
-      prevPosts.map(post => 
-        post.id === postId 
-          ? { ...post, active: !post.active }
-          : post
-      )
-    );
+  const handleToggleActive = async (postId: number) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ action: 'toggle-active' }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const updatedPost = data.post;
+        
+        // Update the local state
+        setPosts(prevPosts => 
+          prevPosts.map(post => 
+            post.id === postId 
+              ? { ...post, active: updatedPost.active }
+              : post
+          )
+        );
+
+        // Show alert message as per requirements
+        alert(`Post "${posts.find(p => p.id === postId)?.title}" is now ${updatedPost.active ? 'Active' : 'Inactive'}`);
+      } else {
+        alert('Failed to update post status');
+      }
+    } catch (error) {
+      console.error('Error toggling post status:', error);
+      alert('Failed to update post status');
+    }
   };
 
   return (

@@ -9,8 +9,6 @@ interface PostListItemProps {
 export default function PostListItem({ post, onToggleActive }: PostListItemProps) {
   const handleToggleActive = () => {
     onToggleActive(post.id);
-    // Display message as per requirements
-    alert(`Post "${post.title}" active status: ${!post.active ? 'Active' : 'Inactive'}`);
   };
 
   return (

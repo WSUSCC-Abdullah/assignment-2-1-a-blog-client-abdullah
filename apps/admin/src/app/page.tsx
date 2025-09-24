@@ -1,4 +1,4 @@
-import { posts } from "@repo/db/data";
+import { getAllPosts } from "@repo/db/service";
 import { isLoggedIn } from "../utils/auth";
 import LoginForm from "../components/LoginForm";
 import AdminLayout from "../components/AdminLayout";
@@ -12,6 +12,8 @@ export default async function Home() {
   if (!loggedIn) {
     return <LoginForm />;
   } else {
+    const posts = await getAllPosts();
+    
     return (
       <AdminLayout>
         <AdminPostList initialPosts={posts} />

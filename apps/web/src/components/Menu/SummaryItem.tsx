@@ -27,7 +27,7 @@ export function SummaryItem({
       }}
     >
       <span>{name}</span>
-      <span style={{ opacity: 0.7 }}>{count}</span>
+      <span style={{ opacity: 0.7 }} data-test-id="post-count">{count}</span>
     </div>
   );
 }

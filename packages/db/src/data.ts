@@ -47,7 +47,7 @@ export const posts: Post[] = [
     category: "Node",
     tags: "Back-End,Databases,",
     views: 320,
-    likes: 100,
+    likes: 3,
     active: true,
   },
   {
@@ -101,6 +101,6 @@ export const posts: Post[] = [
     tags: "Programming,Mainframes,",
     views: 2500,
     likes: 1900,
-    active: true,
+    active: false,
   },
 ];

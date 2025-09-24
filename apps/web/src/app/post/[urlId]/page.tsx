@@ -2,8 +2,9 @@ import { posts } from "@repo/db/data";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 
-export default function Page({ params }: { params: { urlId: string } }) {
-  const post = posts.find((p) => p.id.toString() === params.urlId);
+export default async function Page({ params }: { params: Promise<{ urlId: string }> }) {
+  const { urlId } = await params;
+  const post = posts.find((p) => p.urlId === urlId);
 
   if (!post) {
     return <div style={{ padding: 32 }}>Article not found</div>;
@@ -11,6 +12,7 @@ export default function Page({ params }: { params: { urlId: string } }) {
 
   return (
     <div
+      data-test-id={`blog-post-${post.id}`}
       style={{
         maxWidth: 700,
         margin: "40px auto",

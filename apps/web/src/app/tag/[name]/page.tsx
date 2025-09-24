@@ -1,18 +1,23 @@
 import { posts } from "@repo/db/data";
 import { Main } from "@/components/Main";
 
-export default function Page({ params }: { params: { name: string } }) {
+export default async function Page({ params }: { params: Promise<{ name: string }> }) {
+  const { name } = await params;
   const filteredPosts = posts.filter((post) =>
-    post.tags
+    post.active && post.tags
       .split(",")
       .map((tag: string) => tag.trim().toLowerCase())
-      .includes(params.name.toLowerCase())
+      .includes(name.toLowerCase())
   );
 
   return (
     <div>
-      <h1 style={{ padding: "1rem 2rem" }}>Tag: {params.name}</h1>
-      <Main posts={filteredPosts} />
+      <h1 style={{ padding: "1rem 2rem" }}>Tag: {name}</h1>
+      {filteredPosts.length === 0 ? (
+        <div style={{ padding: "1rem 2rem" }}>0 Posts</div>
+      ) : (
+        <Main posts={filteredPosts} />
+      )}
     </div>
   );
 }

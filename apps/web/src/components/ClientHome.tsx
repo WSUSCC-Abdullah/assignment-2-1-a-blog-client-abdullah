@@ -7,7 +7,7 @@ interface ClientHomeProps {
 }
 
 export default function ClientHome({ posts, search }: ClientHomeProps) {
-  const filteredPosts = posts.filter(
+  const filteredPosts = posts.filter(p => p.active).filter(
     p =>
       p.title.toLowerCase().includes(search.toLowerCase()) ||
       p.description.toLowerCase().includes(search.toLowerCase())

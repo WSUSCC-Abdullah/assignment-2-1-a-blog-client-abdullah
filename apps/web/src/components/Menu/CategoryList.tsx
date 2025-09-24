@@ -9,12 +9,11 @@ export function CategoryList({ posts }: { posts: Post[] }) {
     <ul>
       {categories(posts).map((item) => (
         <li key={item.name}>
-          <Link href={`/category/${toUrlPath(item.name)}`}>
+          <Link href={`/category/${toUrlPath(item.name)}`} title={`Category / ${item.name}`}>
             <SummaryItem
               count={item.count}
               name={item.name}
               isSelected={false} // Replace with logic if you want to highlight selected
-              title={`Posts in ${item.name}`}
             />
           </Link>
         </li>

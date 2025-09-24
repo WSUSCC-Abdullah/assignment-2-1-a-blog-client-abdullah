@@ -16,12 +16,11 @@ export function TagList({
     <ul>
       {postTags.map((item) => (
         <li key={item.name}>
-          <Link href={`/tag/${item.name.toLowerCase()}`}>
+          <Link href={`/tags/${item.name.toLowerCase().replace(/\s+/g, '-')}`} title={`Tag / ${item.name}`}>
             <SummaryItem
               name={item.name}
               count={item.count}
               isSelected={selectedTag === item.name}
-              title={`Posts tagged ${item.name}`}
             />
           </Link>
         </li>

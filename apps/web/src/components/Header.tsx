@@ -1,14 +1,25 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function Header({ onSearch }: { onSearch?: (q: string) => void }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [query, setQuery] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  const handleSearch = (value: string) => {
+    setQuery(value);
+    onSearch?.(value);
+    // Navigate immediately if there's a value
+    if (value.trim()) {
+      router.push(`/search?q=${encodeURIComponent(value)}`);
+    }
+  };
 
   return (
     <header
@@ -48,12 +59,9 @@ export function Header({ onSearch }: { onSearch?: (q: string) => void }) {
       <div style={{ flex: 2, display: "flex", justifyContent: "center" }}>
         <input
           type="text"
-          placeholder="Search posts..."
+          placeholder="Search"
           value={query}
-          onChange={(e) => {
-            setQuery(e.target.value);
-            onSearch?.(e.target.value);
-          }}
+          onChange={(e) => handleSearch(e.target.value)}
           style={{
             width: "100%",
             maxWidth: 400,

@@ -21,11 +21,20 @@ export function BlogListItem({ post }: { post: Post }) {
         style={{ width: 120, height: 80, objectFit: "cover", borderRadius: 4 }}
       />
       <div style={{ flex: 1 }}>
-        <Link href={`/post/${post.id}`}>
-          <h2 style={{ margin: 0 }}>{post.title}</h2>
-        </Link>
+        <h2 style={{ margin: 0 }}>
+          <Link href={`/post/${post.urlId}`}>
+            {post.title}
+          </Link>
+        </h2>
+        <div style={{ color: "#888", fontSize: 14, marginBottom: 4 }}>
+          {post.category}
+        </div>
         <div style={{ color: "#888", fontSize: 14 }}>
-          {new Date(post.date).toLocaleDateString()}
+          {new Date(post.date).toLocaleDateString('en-GB', { 
+            day: 'numeric', 
+            month: 'short', 
+            year: 'numeric' 
+          })}
         </div>
         <div style={{ margin: "8px 0" }}>{post.description}</div>
         <div>
@@ -45,7 +54,9 @@ export function BlogListItem({ post }: { post: Post }) {
           ))}
         </div>
         <div style={{ marginTop: 8, fontSize: 12, color: "#888" }}>
-          {post.likes} likes &middot; {post.views} views
+          <span>{post.views} views</span>
+          <span style={{ margin: "0 8px" }}>&middot;</span>
+          <span>{post.likes} likes</span>
         </div>
       </div>
     </article>

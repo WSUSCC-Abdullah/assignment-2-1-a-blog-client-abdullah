@@ -28,8 +28,8 @@ export function Header({ onSearch }: { onSearch?: (q: string) => void }) {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "16px 32px",
-        borderBottom: "1px solid #eee",
-        background: "var(--header-bg, #fff)",
+        borderBottom: "1px solid var(--border-color)",
+        background: "var(--header-bg)",
         position: "sticky",
         top: 0,
         zIndex: 100,
@@ -67,7 +67,9 @@ export function Header({ onSearch }: { onSearch?: (q: string) => void }) {
             maxWidth: 400,
             padding: "8px 12px",
             borderRadius: 4,
-            border: "1px solid #ccc",
+            border: "1px solid var(--border-color)",
+            background: "var(--input-bg)",
+            color: "var(--text-primary)",
           }}
         />
       </div>
@@ -78,9 +80,9 @@ export function Header({ onSearch }: { onSearch?: (q: string) => void }) {
           style={{
             padding: "8px 16px",
             borderRadius: 4,
-            border: "none",
-            background: "#222",
-            color: "#fff",
+            border: "1px solid var(--border-color)",
+            background: theme === "light" ? "#f8f9fa" : "#374151",
+            color: "var(--text-primary)",
             fontWeight: "bold",
             cursor: "pointer",
           }}

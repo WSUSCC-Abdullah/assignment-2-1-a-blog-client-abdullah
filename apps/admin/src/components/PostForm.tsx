@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { Post } from '@repo/db/data';
+import ImageUpload from './ImageUpload';
 
 interface PostFormData {
   title: string;
@@ -251,37 +252,14 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
             )}
           </div>
 
-          {/* Image URL */}
+          {/* Image Upload */}
           <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-1">
-              Image URL
-            </label>
-            <input
-              type="url"
-              id="imageUrl"
-              value={formData.imageUrl}
-              onChange={(e) => handleChange('imageUrl', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
-                errors.imageUrl ? 'border-red-500' : 'border-gray-300'
-              }`}
-              placeholder="https://example.com/image.jpg"
+            <ImageUpload
+              currentImageUrl={formData.imageUrl}
+              onImageUploaded={(imageUrl) => handleChange('imageUrl', imageUrl)}
             />
             {errors.imageUrl && (
               <p className="mt-1 text-sm text-red-600">{errors.imageUrl}</p>
-            )}
-
-            {/* Image Preview */}
-            {formData.imageUrl && !errors.imageUrl && (
-              <div className="mt-2">
-                <img
-                  src={formData.imageUrl}
-                  alt="Preview"
-                  className="w-32 h-32 object-cover rounded-md border border-gray-300"
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://via.placeholder.com/128x128?text=Invalid+Image';
-                  }}
-                />
-              </div>
             )}
           </div>
 

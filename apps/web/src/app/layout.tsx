@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import AppShell from "./AppShell";
+import { getActivePosts } from "@repo/db/service";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,15 +18,17 @@ export const metadata: Metadata = {
   description: "Blog about full stack development",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const posts = await getActivePosts();
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <AppShell>{children}</AppShell>
+        <AppShell posts={posts}>{children}</AppShell>
       </body>
     </html>
   );

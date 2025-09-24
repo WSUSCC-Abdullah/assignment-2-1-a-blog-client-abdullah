@@ -13,9 +13,9 @@ export function SummaryItem({
     <div
       title={title}
       style={{
-        background: isSelected ? "#e0e0e0" : "transparent",
-        color: isSelected ? "#222" : "#555",
-        fontWeight: isSelected ? "bold" : "normal",
+        background: isSelected ? "var(--bg-accent)" : "transparent",
+        color: isSelected ? "var(--text-primary)" : "var(--text-secondary)",
+        fontWeight: "bold",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",

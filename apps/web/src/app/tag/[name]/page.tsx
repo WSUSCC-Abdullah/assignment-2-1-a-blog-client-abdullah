@@ -1,9 +1,10 @@
-import { posts } from "@repo/db/data";
+import { getActivePosts } from "@repo/db/service";
 import { Main } from "@/components/Main";
 
 export default async function Page({ params }: { params: Promise<{ name: string }> }) {
   const { name } = await params;
-  const filteredPosts = posts.filter((post) =>
+  const allPosts = await getActivePosts();
+  const filteredPosts = allPosts.filter((post) =>
     post.active && post.tags
       .split(",")
       .map((tag: string) => tag.trim().toLowerCase())

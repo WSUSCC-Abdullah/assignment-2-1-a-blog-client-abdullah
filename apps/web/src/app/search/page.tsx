@@ -1,4 +1,4 @@
-import { posts } from "@repo/db/data";
+import { getActivePosts } from "@repo/db/service";
 import { Main } from "@/components/Main";
 
 export default async function Page({
@@ -7,8 +7,9 @@ export default async function Page({
   searchParams: Promise<{ q: string }>;
 }) {
   const { q } = await searchParams;
+  const allPosts = await getActivePosts();
   
-  const filteredPosts = posts.filter((post) => 
+  const filteredPosts = allPosts.filter((post) => 
     post.active && (
       post.title.toLowerCase().includes(q?.toLowerCase() || '') ||
       post.description.toLowerCase().includes(q?.toLowerCase() || '')

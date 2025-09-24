@@ -3,6 +3,11 @@ import { posts as staticPosts } from './data.js';
 
 // Initialize database with static data if empty
 export async function seedDatabase() {
+  // Prevent running in browser environment
+  if (typeof window !== 'undefined') {
+    return;
+  }
+  
   try {
     const existingPosts = await client.db.post.count();
     
@@ -36,6 +41,9 @@ export async function seedDatabase() {
 
 // Get all posts with like counts
 export async function getAllPosts() {
+  if (typeof window !== 'undefined') {
+    throw new Error('Database operations cannot be performed in the browser');
+  }
   await seedDatabase();
   
   const posts = await client.db.post.findMany({
@@ -55,6 +63,9 @@ export async function getAllPosts() {
 
 // Get active posts only
 export async function getActivePosts() {
+  if (typeof window !== 'undefined') {
+    throw new Error('Database operations cannot be performed in the browser');
+  }
   await seedDatabase();
   
   const posts = await client.db.post.findMany({

@@ -5,6 +5,11 @@ declare global {
 }
 
 export const createClient = () => {
+  // Prevent Prisma from running in browser environment
+  if (typeof window !== 'undefined') {
+    throw new Error('PrismaClient cannot be used in the browser');
+  }
+
   if (global.prisma) {
     return global.prisma;
   }

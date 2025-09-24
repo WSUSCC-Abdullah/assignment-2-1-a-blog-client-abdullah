@@ -18,6 +18,7 @@ model Post {
   views       Int      @default(0)
   active      Boolean  @default(true)
   Likes       Like[]
+  Comments    Comment[]
   content     String   // <-- add this
   category    String   // <-- add this
   description String   // <-- add this
@@ -31,4 +32,17 @@ model Like {
   Post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@id([postId, userIP])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  content   String
+  author    String
+  email     String
+  createdAt DateTime @default(now())
+  parentId  Int?     // For nested replies
+  Post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
 }

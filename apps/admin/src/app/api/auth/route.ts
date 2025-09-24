@@ -48,6 +48,35 @@ export async function POST(request: NextRequest) {
   }
 }
 
+export async function GET() {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get('auth_token')?.value;
+
+    if (!token) {
+      return NextResponse.json(
+        { error: 'Not authenticated' },
+        { status: 401 }
+      );
+    }
+
+    try {
+      jwt.verify(token, env.JWT_SECRET);
+      return NextResponse.json({ success: true, authenticated: true });
+    } catch (error) {
+      return NextResponse.json(
+        { error: 'Invalid token' },
+        { status: 401 }
+      );
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'An error occurred during authentication check' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE() {
   try {
     // Remove the auth_token cookie to log out

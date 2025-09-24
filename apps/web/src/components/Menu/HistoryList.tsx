@@ -44,7 +44,7 @@ export function HistoryList({
           <li key={`${year}-${month}`}>
             <Link href={`/history/${year}/${month}`} title={`History / ${monthName}, ${year}`}>
               <SummaryItem
-                name={`${monthName} ${year}`}
+                name={`${monthName}, ${year}`}
                 count={count}
                 isSelected={selectedYear === year && selectedMonth === month}
               />

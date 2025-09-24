@@ -61,7 +61,7 @@ export default function ImageUpload({ onImageUploaded, currentImageUrl }: ImageU
 
   return (
     <div className="space-y-4">
-      <label className="block text-sm font-medium text-gray-700">
+      <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
         Blog Image
       </label>
       
@@ -70,7 +70,7 @@ export default function ImageUpload({ onImageUploaded, currentImageUrl }: ImageU
           <img
             src={previewUrl}
             alt="Preview"
-            className="w-full max-w-md h-48 object-cover border border-gray-300 rounded-lg"
+            className="w-full max-w-md h-48 object-cover border border-gray-300 dark:border-gray-600 rounded-lg"
           />
           <button
             type="button"
@@ -81,10 +81,10 @@ export default function ImageUpload({ onImageUploaded, currentImageUrl }: ImageU
           </button>
         </div>
       ) : (
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+        <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center bg-white dark:bg-gray-700">
           <div className="space-y-2">
             <svg
-              className="mx-auto h-12 w-12 text-gray-400"
+              className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500"
               stroke="currentColor"
               fill="none"
               viewBox="0 0 48 48"
@@ -96,8 +96,8 @@ export default function ImageUpload({ onImageUploaded, currentImageUrl }: ImageU
                 strokeLinejoin="round"
               />
             </svg>
-            <p className="text-gray-600">Click to upload an image</p>
-            <p className="text-xs text-gray-500">
+            <p className="text-gray-600 dark:text-gray-300">Click to upload an image</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
               PNG, JPG, GIF up to 5MB
             </p>
           </div>
@@ -109,7 +109,7 @@ export default function ImageUpload({ onImageUploaded, currentImageUrl }: ImageU
         type="file"
         accept="image/*"
         onChange={handleFileChange}
-        className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+        className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
         disabled={uploading}
       />
 

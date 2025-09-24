@@ -137,9 +137,9 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h1 className="text-2xl font-bold text-gray-900">
+      <div className="bg-white dark:bg-gray-800 shadow dark:shadow-gray-700/50 rounded-lg">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
             {isEdit ? 'Edit Post' : 'Create New Post'}
           </h1>
         </div>
@@ -147,7 +147,7 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Title */}
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Title
             </label>
             <input
@@ -155,19 +155,19 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
               id="title"
               value={formData.title}
               onChange={(e) => handleChange('title', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
-                errors.title ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                errors.title ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
               placeholder="Enter post title"
             />
             {errors.title && (
-              <p className="mt-1 text-sm text-red-600">{errors.title}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.title}</p>
             )}
           </div>
 
           {/* Description */}
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Description (max 200 characters)
             </label>
             <textarea
@@ -175,8 +175,8 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
               rows={3}
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
-                errors.description ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                errors.description ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
               placeholder="Enter post description"
               maxLength={200}
@@ -184,10 +184,10 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
             <div className="flex justify-between mt-1">
               <div>
                 {errors.description && (
-                  <p className="text-sm text-red-600">{errors.description}</p>
+                  <p className="text-sm text-red-600 dark:text-red-400">{errors.description}</p>
                 )}
               </div>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 {formData.description.length}/200
               </p>
             </div>
@@ -196,7 +196,7 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
             <button
               type="button"
               onClick={handlePreviewToggle}
-              className="mt-2 px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 rounded-md hover:bg-indigo-100 transition-colors"
+              className="mt-2 px-4 py-2 text-sm font-medium text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/50 border border-indigo-200 dark:border-indigo-700 rounded-md hover:bg-indigo-100 dark:hover:bg-indigo-900/70 transition-colors"
             >
               {isPreview ? 'Close Preview' : 'Preview'}
             </button>
@@ -204,13 +204,13 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
 
           {/* Content */}
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Content (Markdown)
             </label>
             {isPreview ? (
-              <div className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 min-h-[200px]">
+              <div className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 min-h-[200px]">
                 <div 
-                  className="prose max-w-none"
+                  className="prose max-w-none prose-gray dark:prose-invert"
                   dangerouslySetInnerHTML={{ __html: renderMarkdown(formData.content) }}
                 />
               </div>
@@ -221,20 +221,20 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
                 rows={10}
                 value={formData.content}
                 onChange={(e) => handleChange('content', e.target.value)}
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
-                  errors.content ? 'border-red-500' : 'border-gray-300'
+                className={`w-full px-3 py-2 border rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                  errors.content ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                 }`}
                 placeholder="Enter post content in Markdown"
               />
             )}
             {errors.content && (
-              <p className="mt-1 text-sm text-red-600">{errors.content}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.content}</p>
             )}
           </div>
 
           {/* Tags */}
           <div>
-            <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1">
               Tags (comma-separated)
             </label>
             <input
@@ -242,8 +242,8 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
               id="tags"
               value={formData.tags}
               onChange={(e) => handleChange('tags', e.target.value)}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
-                errors.tags ? 'border-red-500' : 'border-gray-300'
+              className={`w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
+                errors.tags ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
               }`}
               placeholder="e.g. JavaScript, React, Web Development"
             />
@@ -268,7 +268,7 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
             <button
               type="button"
               onClick={() => window.history.back()}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+              className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
             >
               Cancel
             </button>

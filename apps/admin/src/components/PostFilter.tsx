@@ -62,18 +62,18 @@ export default function PostFilter({
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow mb-6">
-      <h2 className="text-lg font-medium text-gray-900 mb-4">Filters & Sorting</h2>
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow dark:shadow-gray-700/50 mb-6">
+      <h2 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Filters & Sorting</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
         {/* Search */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Search Title or Content
           </label>
           <input
             type="text"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Search posts..."
             value={filters.searchTerm}
             onChange={(e) => handleSearchChange(e.target.value)}
@@ -82,12 +82,12 @@ export default function PostFilter({
 
         {/* Date From */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             From Date
           </label>
           <input
             type="date"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             value={filters.dateFrom}
             onChange={(e) => handleDateFromChange(e.target.value)}
           />
@@ -95,12 +95,12 @@ export default function PostFilter({
 
         {/* Date To */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             To Date
           </label>
           <input
             type="date"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             value={filters.dateTo}
             onChange={(e) => handleDateToChange(e.target.value)}
           />
@@ -109,11 +109,11 @@ export default function PostFilter({
 
       {/* Visibility Filter */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Visibility
         </label>
         <div className="flex space-x-4">
-          <label className="flex items-center">
+          <label className="flex items-center text-gray-700 dark:text-gray-300">
             <input
               type="radio"
               name="visibility"
@@ -124,7 +124,7 @@ export default function PostFilter({
             />
             All Posts
           </label>
-          <label className="flex items-center">
+          <label className="flex items-center text-gray-700 dark:text-gray-300">
             <input
               type="radio"
               name="visibility"
@@ -135,7 +135,7 @@ export default function PostFilter({
             />
             Active Only
           </label>
-          <label className="flex items-center">
+          <label className="flex items-center text-gray-700 dark:text-gray-300">
             <input
               type="radio"
               name="visibility"
@@ -151,7 +151,7 @@ export default function PostFilter({
 
       {/* Tags Filter */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Tags
         </label>
         <div className="flex flex-wrap gap-2">
@@ -165,8 +165,8 @@ export default function PostFilter({
               />
               <span className={`px-2 py-1 text-xs rounded ${
                 filters.selectedTags.includes(tag)
-                  ? 'bg-indigo-100 text-indigo-800'
-                  : 'bg-gray-100 text-gray-800'
+                  ? 'bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
               }`}>
                 {tag}
               </span>
@@ -178,13 +178,13 @@ export default function PostFilter({
       {/* Sorting */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Sort By
           </label>
           <select
             value={sorting.field}
             onChange={(e) => handleSortFieldChange(e.target.value as 'title' | 'createdAt')}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           >
             <option value="title">Title</option>
             <option value="createdAt">Creation Date</option>
@@ -192,13 +192,13 @@ export default function PostFilter({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Direction
           </label>
           <select
             value={sorting.direction}
             onChange={(e) => handleSortDirectionChange(e.target.value as 'asc' | 'desc')}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>

@@ -146,7 +146,7 @@ export default function AdminPostList({ initialPosts }: AdminPostListProps) {
     <div>
       {/* Header with Create button */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
           Posts ({filteredAndSortedPosts.length})
         </h1>
         <Link
@@ -177,8 +177,8 @@ export default function AdminPostList({ initialPosts }: AdminPostListProps) {
             />
           ))
         ) : (
-          <div className="bg-white rounded-lg shadow p-8 text-center">
-            <p className="text-gray-500 text-lg">No posts found matching your filters.</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8 text-center">
+            <p className="text-gray-500 dark:text-gray-400 text-lg">No posts found matching your filters.</p>
           </div>
         )}
       </div>

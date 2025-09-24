@@ -12,7 +12,7 @@ export default function PostListItem({ post, onToggleActive }: PostListItemProps
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-700/50 p-6 hover:shadow-md dark:hover:shadow-gray-700/70 transition-shadow">
       <div className="flex items-start space-x-4">
         {/* Image */}
         <div className="flex-shrink-0">
@@ -32,18 +32,18 @@ export default function PostListItem({ post, onToggleActive }: PostListItemProps
             <div className="flex-1">
               <Link
                 href={`/posts/${post.id}/edit`}
-                className="text-xl font-semibold text-gray-900 hover:text-indigo-600 transition-colors"
+                className="text-xl font-semibold text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
               >
                 {post.title}
               </Link>
               
-              <p className="text-gray-600 mt-1 line-clamp-2">
+              <p className="text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">
                 {post.description}
               </p>
 
               {/* Metadata */}
-              <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+              <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300">
                   {post.category}
                 </span>
                 
@@ -53,7 +53,7 @@ export default function PostListItem({ post, onToggleActive }: PostListItemProps
                     {post.tags.split(',').filter(tag => tag.trim()).map((tag: string) => (
                       <span
                         key={tag}
-                        className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800"
+                        className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300"
                       >
                         {tag.trim()}
                       </span>
@@ -73,8 +73,8 @@ export default function PostListItem({ post, onToggleActive }: PostListItemProps
                 onClick={handleToggleActive}
                 className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                   post.active
-                    ? 'bg-green-100 text-green-800 hover:bg-green-200'
-                    : 'bg-red-100 text-red-800 hover:bg-red-200'
+                    ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-800'
+                    : 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 hover:bg-red-200 dark:hover:bg-red-800'
                 }`}
               >
                 {post.active ? 'Active' : 'Inactive'}

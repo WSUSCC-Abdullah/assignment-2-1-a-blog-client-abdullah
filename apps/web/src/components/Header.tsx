@@ -38,21 +38,33 @@ export function Header({ onSearch }: { onSearch?: (q: string) => void }) {
       {/* Home Button (left) */}
       <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
         <Link href="/" style={{ textDecoration: "none" }}>
-          <button
+          <div
             style={{
-              padding: "8px 20px",
-              background: "#0070f3",
-              color: "#fff",
-              border: "none",
-              borderRadius: 4,
-              fontWeight: "bold",
-              fontSize: 18,
-              letterSpacing: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
               cursor: "pointer",
             }}
           >
-            Full Stack Blog
-          </button>
+            <img
+              src="/wsu-logo.svg"
+              alt="WSU Logo"
+              style={{
+                width: "32px",
+                height: "32px",
+              }}
+            />
+            <span
+              style={{
+                color: "var(--text-primary)",
+                fontWeight: "bold",
+                fontSize: 18,
+                letterSpacing: 1,
+              }}
+            >
+              Full Stack Blog
+            </span>
+          </div>
         </Link>
       </div>
       {/* Search Bar (center) */}

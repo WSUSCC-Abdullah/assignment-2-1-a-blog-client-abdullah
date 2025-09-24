@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+  <!-- Red shield background -->
+  <path d="M150 20 L280 80 L280 200 Q280 240 250 280 L150 340 L50 280 Q20 240 20 200 L20 80 Z" fill="#B91C3C"/>
+  
+  <!-- White W letter -->
+  <g fill="white">
+    <path d="M50 80 L80 80 L110 220 L130 140 L150 140 L170 140 L190 220 L220 80 L250 80 L210 280 L180 280 L150 200 L120 280 L90 280 Z"/>
+  </g>
+</svg>

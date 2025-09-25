@@ -1,4 +1,4 @@
-import { getPostByUrlId } from "@repo/db/service";
+import { getPostByUrlId, getNextPost } from "@repo/db/service";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import LikeButton from "../../../components/LikeButton";
@@ -30,6 +30,7 @@ export default async function Page({ params }: { params: Promise<{ urlId: string
   const { urlId } = await params;
   const clientIP = await getClientIP();
   const post = await getPostByUrlId(urlId, clientIP);
+  const nextPost = await getNextPost(urlId);
 
   if (!post) {
     return <div style={{ padding: 32 }}>Article not found</div>;
@@ -137,7 +138,14 @@ export default async function Page({ params }: { params: Promise<{ urlId: string
         </div>
       </div>
       
-      <div style={{ marginTop: "1.5rem" }}>
+      <div style={{ 
+        marginTop: "1.5rem",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: "1rem"
+      }}>
         <Link href="/" style={{ 
           color: "var(--primary-color)", 
           textDecoration: "none",
@@ -148,6 +156,24 @@ export default async function Page({ params }: { params: Promise<{ urlId: string
         }}>
           ← Back to Home
         </Link>
+        
+        {nextPost && (
+          <Link href={`/post/${nextPost.urlId}`} style={{ 
+            color: "var(--primary-color)", 
+            textDecoration: "none",
+            fontWeight: "500",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            background: "var(--bg-accent)",
+            padding: "0.5rem 1rem",
+            borderRadius: "6px",
+            border: "1px solid var(--border-color)",
+            transition: "all 0.2s ease"
+          }}>
+            Next Post: {nextPost.title.length > 30 ? `${nextPost.title.substring(0, 30)}...` : nextPost.title} →
+          </Link>
+        )}
       </div>
       </div>
       

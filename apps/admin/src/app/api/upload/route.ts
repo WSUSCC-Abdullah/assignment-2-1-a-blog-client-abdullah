@@ -2,9 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
+import { isLoggedIn } from '../../../utils/auth';
 
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
+    const authenticated = await isLoggedIn();
+    if (!authenticated) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const formData = await request.formData();
     const file = formData.get('image') as File;
 
@@ -36,18 +46,27 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create uploads directory if it doesn't exist
-    const uploadsDir = join(process.cwd(), 'public', 'uploads');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
+    // Create uploads directories for both admin and web apps
+    const adminUploadsDir = join(process.cwd(), 'public', 'uploads');
+    const webUploadsDir = join(process.cwd(), '..', 'web', 'public', 'uploads');
+
+    if (!existsSync(adminUploadsDir)) {
+      await mkdir(adminUploadsDir, { recursive: true });
+    }
+    if (!existsSync(webUploadsDir)) {
+      await mkdir(webUploadsDir, { recursive: true });
     }
 
     // Generate unique filename
     const timestamp = Date.now();
     const filename = `${timestamp}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-    const filepath = join(uploadsDir, filename);
+    
+    // Save to both admin and web directories
+    const adminFilepath = join(adminUploadsDir, filename);
+    const webFilepath = join(webUploadsDir, filename);
 
-    await writeFile(filepath, buffer);
+    await writeFile(adminFilepath, buffer);
+    await writeFile(webFilepath, buffer);
 
     // Return the public URL
     const imageUrl = `/uploads/${filename}`;

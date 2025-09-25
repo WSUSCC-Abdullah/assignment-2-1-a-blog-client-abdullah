@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { updatePost, togglePostActive, getPostById } from '@repo/db/service';
+import { isLoggedIn } from '../../../../utils/auth';
 
 export async function GET(
   request: NextRequest,
@@ -40,6 +41,15 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Check authentication
+    const authenticated = await isLoggedIn();
+    if (!authenticated) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const data = await request.json();
     
@@ -76,6 +86,15 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // Check authentication
+    const authenticated = await isLoggedIn();
+    if (!authenticated) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const { action } = await request.json();
     

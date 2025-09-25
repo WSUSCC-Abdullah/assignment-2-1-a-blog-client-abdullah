@@ -22,6 +22,48 @@ function getClientIP(request: NextRequest): string {
   return '127.0.0.1';
 }
 
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const postId = searchParams.get('postId');
+    const userIP = getClientIP(request);
+
+    if (!postId) {
+      return NextResponse.json(
+        { error: 'Post ID is required' },
+        { status: 400 }
+      );
+    }
+
+    // Get like count
+    const likeCount = await client.db.like.count({
+      where: { postId: parseInt(postId) }
+    });
+
+    // Check if user has liked this post
+    const existingLike = await client.db.like.findUnique({
+      where: {
+        postId_userIP: {
+          postId: parseInt(postId),
+          userIP: userIP
+        }
+      }
+    });
+
+    return NextResponse.json({ 
+      likeCount,
+      liked: !!existingLike
+    });
+
+  } catch (error) {
+    console.error('Error getting like status:', error);
+    return NextResponse.json(
+      { error: 'Failed to get like status' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { postId } = await request.json();

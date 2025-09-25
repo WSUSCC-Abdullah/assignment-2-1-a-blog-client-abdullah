@@ -66,10 +66,23 @@ export default function PostForm({ initialData, isEdit = false, onSave }: PostFo
     if (!formData.imageUrl.trim()) {
       newErrors.imageUrl = 'Image URL is required';
     } else {
-      // Basic URL validation
-      try {
-        new URL(formData.imageUrl);
-      } catch {
+      // URL validation - accept both full URLs and relative paths
+      const isValidUrl = (url: string): boolean => {
+        // Check if it's a relative path (starts with /)
+        if (url.startsWith('/')) {
+          return true;
+        }
+        
+        // Check if it's a full URL
+        try {
+          new URL(url);
+          return true;
+        } catch {
+          return false;
+        }
+      };
+
+      if (!isValidUrl(formData.imageUrl)) {
         newErrors.imageUrl = 'Please enter a valid URL';
       }
     }

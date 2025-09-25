@@ -303,6 +303,64 @@ export async function updatePost(id: number, postData: {
   });
 }
 
+// Get next active post by date (chronological order)
+export async function getNextPost(currentUrlId: string) {
+  await seedDatabase();
+  
+  // First get the current post to find its date
+  const currentPost = await client.db.post.findUnique({
+    where: { urlId: currentUrlId }
+  });
+
+  if (!currentPost) return null;
+
+  // Find the next post with a date after the current post's date
+  const nextPost = await client.db.post.findFirst({
+    where: {
+      active: true,
+      date: {
+        gt: currentPost.date
+      }
+    },
+    include: {
+      Likes: true
+    },
+    orderBy: {
+      date: 'asc' // Get the earliest post that's after the current one
+    }
+  });
+
+  // If no post found after current date, wrap around to the oldest post
+  if (!nextPost) {
+    const firstPost = await client.db.post.findFirst({
+      where: {
+        active: true,
+        urlId: {
+          not: currentUrlId // Don't return the same post
+        }
+      },
+      include: {
+        Likes: true
+      },
+      orderBy: {
+        date: 'asc'
+      }
+    });
+    
+    if (!firstPost) return null;
+    
+    return {
+      ...firstPost,
+      likes: firstPost.Likes.length
+    };
+  }
+
+  return {
+    ...nextPost,
+    likes: nextPost.Likes.length
+  };
+}
+
 export async function togglePostActive(id: number) {
   const post = await client.db.post.findUnique({
     where: { id }

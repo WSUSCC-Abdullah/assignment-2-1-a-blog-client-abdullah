@@ -1,4 +1,4 @@
-import { getActivePosts } from "@repo/db/service";
+import { searchPosts } from "@repo/db/service";
 import { Main } from "@/components/Main";
 
 export default async function Page({
@@ -7,14 +7,9 @@ export default async function Page({
   searchParams: Promise<{ q: string }>;
 }) {
   const { q } = await searchParams;
-  const allPosts = await getActivePosts();
   
-  const filteredPosts = allPosts.filter((post) => 
-    post.active && (
-      post.title.toLowerCase().includes(q?.toLowerCase() || '') ||
-      post.description.toLowerCase().includes(q?.toLowerCase() || '')
-    )
-  );
+  // Use server-side filtering for better performance
+  const filteredPosts = q ? await searchPosts(q) : [];
 
   return (
     <div>

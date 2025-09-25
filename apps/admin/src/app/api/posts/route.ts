@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createPost } from '@repo/db/service';
+import { isLoggedIn } from '../../../utils/auth';
 
 export async function POST(request: NextRequest) {
   try {
+    // Check authentication
+    const authenticated = await isLoggedIn();
+    if (!authenticated) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const data = await request.json();
     
     // Validate required fields

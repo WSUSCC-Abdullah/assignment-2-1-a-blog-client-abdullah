@@ -10,7 +10,7 @@ export async function seed() {
   const activePosts = postsData.filter(p => p.active);
   
   for (const post of activePosts) {
-    const { likes, views, ...postData } = post;
+    const { likes, ...postData } = post;
     await client.post.upsert({
       where: { id: post.id },
       update: postData,

@@ -46,8 +46,8 @@ export const posts: Post[] = [
     date: new Date("Apr 18, 2022"),
     category: "Node",
     tags: "Back-End,Databases,",
-    views: 320,
-    likes: 3,
+    views: 456,
+    likes: 0,
     active: true,
   },
   {
@@ -64,8 +64,8 @@ export const posts: Post[] = [
     date: new Date("Mar 16, 2020"),
     category: "React",
     tags: "Front-End,Optimisation,",
-    views: 1000,
-    likes: 500,
+    views: 789,
+    likes: 0,
     active: true,
   },
   {
@@ -82,8 +82,8 @@ export const posts: Post[] = [
     date: new Date("Dec 16, 2024"),
     category: "Mongo",
     tags: "Front-End,Dev Tools,",
-    views: 500,
-    likes: 233,
+    views: 234,
+    likes: 0,
     active: true,
   },
   {
@@ -99,8 +99,8 @@ export const posts: Post[] = [
     date: new Date("Dec 16, 2012"),
     category: "DevOps",
     tags: "Programming,Mainframes,",
-    views: 2500,
-    likes: 1900,
+    views: 567,
+    likes: 0,
     active: false,
   },
 ];
